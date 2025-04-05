@@ -9,6 +9,58 @@ body {
     background: #000;
 }
 
+@keyframes moveBlob {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(-100px, 80px) scale(1.2);
+    }
+    50% {
+        transform: translate(120px, -60px) scale(0.9);
+    }
+    75% {
+        transform: translate(-90px, 100px) scale(1.1);
+    }
+    100% {
+        transform: translate(60px, -40px) scale(1);
+    }
+}
+@keyframes slideup {
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes slidedown {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+@keyframes slideright {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes slideleft {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
 .container {
     position: fixed;
     width: 100vw;
@@ -52,31 +104,13 @@ body {
     animation-duration: 16s;
 }
 
-@keyframes moveBlob {
-    0% {
-        transform: translate(0, 0) scale(1);
-    }
-    25% {
-        transform: translate(-100px, 80px) scale(1.2);
-    }
-    50% {
-        transform: translate(120px, -60px) scale(0.9);
-    }
-    75% {
-        transform: translate(-90px, 100px) scale(1.1);
-    }
-    100% {
-        transform: translate(60px, -40px) scale(1);
-    }
-}
-
 .header {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    z-index: 1;
     margin-top: 20px;
+    margin-bottom: 180px;
 }
 
 .content-header {
@@ -84,6 +118,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 200;
     width: 95%;
     background-color: rgba(255, 255, 255, 0.082);
     backdrop-filter: blur(10px);
@@ -94,12 +129,9 @@ body {
     text-align: center;
     font-size: 30px;
     border-radius: 20px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
-.content-header:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 50px;
-}
+.content-header:hover {box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);}
 
 .content-header h2 {
     color: whitesmoke;
@@ -124,14 +156,15 @@ body {
     text-decoration: none;
     transition: color 0.3s ease;
 }
-.nav a:hover {color: cyan;}
+.nav a:hover { color: cyan; }
 
 .content{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 180px;
+    z-index: 100;
+    margin-top: 200px;
     height: 50vh;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.082);
@@ -142,22 +175,13 @@ body {
     color: white;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     border-radius: 20px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
-.content:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 50px;
-}
+.content:hover {box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);}
 
-.content h2 {
-    font-size: 3em;
-    margin-bottom: 0px;
-}
+.content h2 { font-size: 3em; margin-bottom: 0px; }
 
-.content p {
-    font-size: 1.5em;
-    line-height: 1.5;
-}
+.content p { font-size: 1.5em; line-height: 1.5; }
 
 .content a {
     color: cyan;
@@ -165,3 +189,86 @@ body {
     font-size: 1.2em;
     transition: color 0.3s ease;
 }
+
+.game-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 180px;
+    animation: slideup linear;
+    animation-timeline: view();
+    animation-range: entry 10% cover 50%;
+}
+
+.game-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 2;
+    margin: 20px;
+    padding: 20px;
+    width: 250px;
+    height: 300px;
+    background-size: 150%;
+    background-position: center;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(5px);
+    border-top: 1px solid whitesmoke;
+    border-left: 1px solid whitesmoke;
+    box-shadow: 8px 8px 10px black;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 20px;
+    transition: background-image 0.3s ease-in-out, background-size 0.3s ease-in-out, box-shadow 0.3s ease, transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.game-item:hover {
+    background-image: var(--hover-bg);
+    background-size: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 260px;
+    height: 450px;
+}
+
+.game-item h3, .game-item p, .game-item a { transition: opacity 0.5s ease; }
+
+.game-item:hover h3, .game-item:hover p, .game-item:hover a { opacity: 0; }
+
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;    
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.082);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.footer p { display: flex; margin-right: auto; }
+
+.footer ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+}
+.footer a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.footer a:hover { color: cyan; }
+
