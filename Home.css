@@ -2,11 +2,16 @@
     margin: 0;
 }
 
-body {
+html, body {
     margin: 0;
     padding: 0;
     height: 100%;
     background: #000;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */}
+
+body::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Edge */
 }
 
 @keyframes moveBlob {
@@ -24,6 +29,24 @@ body {
     }
     100% {
         transform: translate(60px, -40px) scale(1);
+    }
+}
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes fadeout {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100%);
     }
 }
 @keyframes slideup {
@@ -110,7 +133,6 @@ body {
     align-items: center;
     position: relative;
     margin-top: 20px;
-    margin-bottom: 180px;
 }
 
 .content-header {
@@ -158,7 +180,10 @@ body {
 }
 .nav a:hover { color: cyan; }
 
-.content{
+.content {
+    position: relative;
+    opacity: 1;
+    transform: scale(1) translateY(0);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -175,9 +200,14 @@ body {
     color: white;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     border-radius: 20px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
 }
 .content:hover {box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);}
+
+.content.scrolled {
+    opacity: 0;
+    transform: scale(0.5) translateY(-100px);
+}
 
 .content h2 { font-size: 3em; margin-bottom: 0px; }
 
@@ -198,14 +228,32 @@ body {
     align-items: center;
     height: 100%;
     padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 180px;
-    animation: slideup linear;
-    animation-timeline: view();
-    animation-range: entry 10% cover 50%;
+    margin-top: -30%;
+    margin-bottom: 10%;
+}
+
+.game-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--hover-bg);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0; /* hidden by default */
+    transition: opacity 1s ease;
+    z-index: 0;
+    border-radius: 20px; /* match parent shape */
+}
+
+.game-item:hover::before {
+    opacity: 0.6; /* control your background opacity here */
 }
 
 .game-item {
+    opacity: 0;
+    scale: 0.5;
+    transform: translateY(100px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -226,22 +274,54 @@ body {
     color: white;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     border-radius: 20px;
-    transition: background-image 0.3s ease-in-out, background-size 0.3s ease-in-out, box-shadow 0.3s ease, transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+    transition: background-size 0.3s ease, box-shadow 0.3s ease,
+     opacity 0.3s ease, transform 0.3s ease, scale 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.game-item.visible {
+    opacity: 1;
+    scale: 1;
+    transform: translateY(0);
+}
+
+.game-item.hidden {
+    opacity: 0;
+    scale: 0.8;
+    transform: translateY(100px);
 }
 
 .game-item:hover {
-    background-image: var(--hover-bg);
     background-size: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 260px;
     height: 450px;
 }
 
-.game-item h3, .game-item p, .game-item a { transition: opacity 0.5s ease; }
-
-.game-item:hover h3, .game-item:hover p, .game-item:hover a { opacity: 0; }
+.game-item h3, .game-item p { transition: opacity 0.5s ease; }
+.game-item:hover h3, .game-item:hover p { opacity: 0; }
+.game-item button {
+    transform: translateY(0);
+    background-color: rgba(255, 255, 255, 0.082);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    color: whitesmoke;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+.game-item:hover button {
+    transform: translateY(30%);
+    background-color: rgba(245, 245, 245, 0.666);
+    color: #000;
+}
 
 .footer {
+    position: fixed;
+    bottom: 0;
+    width: 98%;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
@@ -252,7 +332,6 @@ body {
     backdrop-filter: blur(10px);
     color: white;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .footer p { display: flex; margin-right: auto; }
