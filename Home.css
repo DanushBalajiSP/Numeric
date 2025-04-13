@@ -88,8 +88,9 @@ body::-webkit-scrollbar {
 .container {
     position: fixed;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
+    margin-top: -20px;
 }
 
 .blob {
@@ -132,24 +133,26 @@ body::-webkit-scrollbar {
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-content: center;
     position: relative;
     margin-top: 20px;
 }
 
 .content-header {
     position: fixed;
+    width: 98%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;    
+    text-align: center;
     z-index: 200;
-    width: 95%;
     background-color: rgba(255, 255, 255, 0.082);
     backdrop-filter: blur(10px);
     border-top: 1px solid whitesmoke;
     border-left: 1px solid whitesmoke;
     box-shadow: 8px 8px 10px black;
     padding: 15px;
-    text-align: center;
     font-size: 30px;
     border-radius: 20px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -157,8 +160,9 @@ body::-webkit-scrollbar {
 .content-header:hover {box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);}
 
 .content-header h2 {
+    display: flex;
     color: whitesmoke;
-    margin: 0 0 0 40px;
+    margin-right: auto;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -355,33 +359,32 @@ body::-webkit-scrollbar {
 /* General styles for mobile responsiveness */
 @media (max-width: 768px) {
     .content-header {
-        flex-direction: column;
-        align-items: center;
+        width: 93%;
         font-size: 24px;
-        padding: 10px;
+        padding: 15px;
     }
 
     .content-header h2 {
-        font-size: 30px;
-        margin: 10px 0;
+        font-size: 26px;
     }
 
     .nav {
-        width: 100%;
-        justify-content: center;
+        justify-content: flex-end;
+        font-size: 10px;
+        padding: 0;
         gap: 10px;
     }
 
     .content {
         margin-top: 150px;
-        margin-bottom: 80px;
-        height: 480px;
+        margin-bottom: 25vh;
+        height: 50vh;
         padding: 15px;
         font-size: 16px;
     }
 
     .content h2 {
-        font-size: 24px;
+        font-size: 20px;
     }
 
     .content p {
@@ -415,47 +418,27 @@ body::-webkit-scrollbar {
     }
 
     .footer {
-        flex-direction: column;
-        align-items: center;
         padding: 10px;
         font-size: 12px;
     }
 
     .footer ul {
-        flex-direction: column;
         gap: 10px;
+        margin: 5px 20px;
     }
 }
 
 @media (max-width: 480px) {
-    .container {
-        overflow: hidden;
-        height: 100vh;
-        width: 80%;
-    }
-    .header {
-        width: 85%;
-    }
     .content-header {
-        width: 80%;
-        font-size: 18px;
-        padding: 8px;
-    }
-
-    .content-header h2 {
-        font-size: 16px;
+        margin: 0 20px 0 20px;
     }
 
     .content {
         margin-top: 150px;
-        margin-bottom: 80px;
-        width: 60%;
+        margin-bottom: 25vh;
+        width: 70%;
         padding: 15px;
         font-size: 16px;
-    }
-
-    .content h2 {
-        font-size: 20px;
     }
 
     .content p {
@@ -468,7 +451,7 @@ body::-webkit-scrollbar {
     }
 
     .game-item {
-        width: 100%;
+        width: 80%;
         padding: 10px;
     }
 

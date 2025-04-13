@@ -276,7 +276,7 @@ body::-webkit-scrollbar {
 }
 
 /* General styles for mobile responsiveness */
-@media (max-width: 989px) {
+@media (max-width: 768px) {
     html, body {
         flex-direction: column;
         justify-content: flex-start;
