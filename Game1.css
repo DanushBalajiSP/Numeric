@@ -22,6 +22,24 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+/* Keyframe animation for the button click effect */
+@keyframes buttonClickEffect {
+    0% {
+        transform: scale(1);
+        background-color: #00a6ff;
+        color: #fff;
+    }
+    50% {
+        transform: scale(1.2);
+        background-color: #00568b;
+        color: #fff;
+    }
+    100% {
+        transform: scale(1);
+        background-color: #00a6ff;
+        color: #fff;
+    }
+}
 @keyframes glowEffect {
     0% {
         box-shadow: 0 0 10px 2px #00a6ff;
@@ -217,10 +235,6 @@ body::-webkit-scrollbar {
     border-radius: 20px;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
-.bingo-button.glow {
-    animation: glowEffect 1s infinite alternate;
-    animation-delay: 0.5s;
-}
 .bingo-button {
     flex: 0 0 calc(20% - 15px); /* Each button takes 20% of the width minus the gap */
     height: 50px;
@@ -235,7 +249,22 @@ body::-webkit-scrollbar {
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
-
+.bingo-button:hover {
+    background-color: #00568b;
+    transform: scale(1.05);
+}
+.bingo-button:active {
+    background-color: #003f5c;
+    transform: scale(0.95);
+}
+.bingo-button.glow {
+    animation: glowEffect 1s infinite alternate;
+    animation-delay: 0.5s;
+}
+.bingo-button:focus {
+    outline: none;
+    box-shadow: 0 0 5px #00a6ff, 0 0 10px #00a6ff, 0 0 15px #00a6ff;
+}
 .random {
     padding: 10px 15px;
     margin-top: 20px;
@@ -247,7 +276,7 @@ body::-webkit-scrollbar {
 }
 
 /* General styles for mobile responsiveness */
-@media (max-width: 768px) {
+@media (max-width: 989px) {
     html, body {
         flex-direction: column;
         justify-content: flex-start;
@@ -263,8 +292,9 @@ body::-webkit-scrollbar {
     .table-container {
         top: 100px;
         width: 95%;
-        height: auto;
+        height: 85%;
         padding: 15px;
+        flex-direction: column;
         gap: 10px;
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     }
@@ -282,7 +312,7 @@ body::-webkit-scrollbar {
     }
 
     .bingo-stricker {
-        gap: 3%;
+        gap: 5%;
     }
 
     .bingo-stricker h4 {
@@ -290,7 +320,8 @@ body::-webkit-scrollbar {
     }
 
     .bingo-buttons {
-        width: 100%;
+        width: 80%;
+        height: 100%;
         gap: 10px;
         padding: 10px;
         border: 3px solid #00a6ff;
@@ -326,7 +357,7 @@ body::-webkit-scrollbar {
     }
 
     .bingo-button {
-        flex: 0 0 calc(25% - 8px); /* Adjust button size for very small screens */
+        flex: 0 0 calc(20% - 10px); /* Adjust button size for very small screens */
         height: 35px;
         font-size: 12px;
     }
